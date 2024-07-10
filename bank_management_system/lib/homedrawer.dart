@@ -1,4 +1,5 @@
 import 'package:bank_management_system/adminpage.dart';
+import 'package:bank_management_system/login.dart';
 import 'package:bank_management_system/main.dart';
 import 'package:bank_management_system/userpage.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class Homedrawer extends StatelessWidget {
             leading: Icon(Icons.login),
             title: Text('Admin Login'),
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminpage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
             },
           ),
           ListTile(
