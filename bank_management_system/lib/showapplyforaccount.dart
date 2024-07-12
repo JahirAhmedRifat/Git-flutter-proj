@@ -43,7 +43,7 @@ class _ShowapplyforaccountState extends State<Showapplyforaccount> {
     return Scaffold(
       drawer: Admindrawer(),
       appBar: AppBar(
-        title: Text('Show all application for create account'),
+        title: Text('application account details'),
         backgroundColor: Colors.green,
       ),
       body:ListView(
@@ -62,7 +62,7 @@ class _ShowapplyforaccountState extends State<Showapplyforaccount> {
                           child: Card(
                             elevation: 50,
                             shadowColor: Colors.red,
-                            color: Colors.teal,
+                            color: Colors.amberAccent,
                             child: SizedBox(
                               width: 350,
                               height: 280,

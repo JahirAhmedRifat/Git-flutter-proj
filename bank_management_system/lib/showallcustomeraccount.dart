@@ -43,7 +43,7 @@ class _ShowallcustomeraccountState extends State<Showallcustomeraccount> {
     return Scaffold(
       drawer: Admindrawer(),
       appBar: AppBar(
-        title: Text('Show All Customer Account'),
+        title: Text('Show All Customer Account',style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.green,
       ),
       body:ListView(
@@ -62,7 +62,7 @@ class _ShowallcustomeraccountState extends State<Showallcustomeraccount> {
                         child: Card(
                           elevation: 50,
                           shadowColor: Colors.red,
-                          color: Colors.teal,
+                          color: Colors.amber,
                           child: SizedBox(
                             width: 350,
                             height: 330,
@@ -161,7 +161,7 @@ class _ShowallcustomeraccountState extends State<Showallcustomeraccount> {
 
                                   SizedBox(height:5),
                                   Text(
-                                    'Balance : '+snapshot.data![index].balance.toString(),
+                                    'Balance : '+snapshot.data![index].balance.toString()+' tk',
                                     style: TextStyle(
                                       fontSize: 15,
                                     ),

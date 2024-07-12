@@ -60,7 +60,8 @@ class _ApplyaccountState extends State<Applyaccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Application For New Account'),
+        backgroundColor: Colors.red,
+        title: Text('Application For New Account',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
 
       body: Form(
@@ -68,7 +69,6 @@ class _ApplyaccountState extends State<Applyaccount> {
           padding: EdgeInsets.all(10),
           child: ListView(
             children:<Widget>[
-
               Padding(
                 padding: EdgeInsets.all(5),
                 child: TextFormField(
@@ -183,7 +183,9 @@ class _ApplyaccountState extends State<Applyaccount> {
 
 
               ElevatedButton(
-                child: Text('Apply'),
+                child: Text('Apply',
+                style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold),
+                ),
                 onPressed: () async{
                   Applyuseraccount st= await applyforaccount();
 
@@ -197,6 +199,9 @@ class _ApplyaccountState extends State<Applyaccount> {
                     ScaffoldMessenger.of(context).showSnackBar(snk);
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                ),
               ),
             ],
           ),

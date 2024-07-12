@@ -1,4 +1,5 @@
 import 'package:bank_management_system/applyaccount.dart';
+import 'package:bank_management_system/checkbalance.dart';
 import 'package:bank_management_system/main.dart';
 import 'package:bank_management_system/userpage.dart';
 import 'package:flutter/material.dart';
@@ -12,42 +13,59 @@ class Userdrawer extends StatelessWidget {
       child: ListView(
         padding:EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
-            accountName: Text('Services'),
-            accountEmail: Text('-----------------'),
-            currentAccountPicture: CircleAvatar(
-              child: ClipOval(
-                // child: Image.asset('images/books.png'),
-              ),
-            ),
+          DrawerHeader(
             decoration: BoxDecoration(
+              color: Color(0xff007C00),
+               image: DecorationImage(image: AssetImage('images/user_logo2.jpg'),fit: BoxFit.cover)
+            ),
+            padding: EdgeInsets.fromLTRB(5.0,10,0,0),  // Set padding here
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 105),
+                Row(
+                  children: [
+                    Text('User ', style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 24)),
 
-              color: Colors.pinkAccent,
-              // image: DecorationImage(image: AssetImage('images/Python.png'),fit: BoxFit.cover)
+                    Text('Panel ',style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 24)),
+                  ],
+                ),
+              ],
             ),
           ),
+
 
           // ---------------- drawer body --------------------------
 
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: Icon(Icons.home,color: Colors.red),
+            title: Text(
+                'Home',
+                style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 20),
+            ),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.arrow_right_alt_outlined),
-            title: Text('Apply account'),
+            leading: Icon(Icons.app_registration),
+            title: Text(
+                'Apply for account',
+              style: TextStyle(fontSize: 18),
+            ),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Applyaccount()));
             },
           ),
+
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Customer'),
+            leading: Icon(Icons.balance),
+            title: Text(
+              'Check Balance',
+              style: TextStyle(fontSize: 18),
+            ),
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Userpage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Checkbalance()));
             },
           ),
 

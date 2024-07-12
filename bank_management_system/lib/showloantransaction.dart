@@ -43,7 +43,12 @@ class _ShowloantransactionState extends State<Showloantransaction> {
     return Scaffold(
       drawer: Admindrawer(),
       appBar: AppBar(
-        title: Text('Show all Loan Transaction'),
+        title: Text('Show all Loan Transaction', style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 27,
+
+        ),
+        ),
         backgroundColor: Colors.green,
       ),
       body:ListView(
@@ -62,7 +67,7 @@ class _ShowloantransactionState extends State<Showloantransaction> {
                         child: Card(
                           elevation: 50,
                           shadowColor: Colors.red,
-                          color: Colors.teal,
+                          color: Colors.amber,
                           child: SizedBox(
                             width: 350,
                             height: 280,

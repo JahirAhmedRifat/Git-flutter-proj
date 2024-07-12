@@ -12,6 +12,7 @@ class Createaccount {
   String? mar_status;
   String? occupation;
   double? balance;
+  String? img;
   String? msg = null;
 
   Createaccount(
@@ -27,7 +28,9 @@ class Createaccount {
       required this.date,
       required this.mar_status,
       required this.occupation,
-      required this.balance});
+      required this.balance,
+        required this.img
+      });
   factory Createaccount.fromJson(Map<String, dynamic> json) => Createaccount(
         a_number: json['a_number'],
         password: json['password'],
@@ -42,7 +45,9 @@ class Createaccount {
         mar_status: json['mar_status'],
         occupation: json['occupation'],
         balance: json['balance'],
+        img: json['img'],
       );
+
   Map<String, dynamic> toJson() {
     return {
       "a_number": a_number,
@@ -57,7 +62,8 @@ class Createaccount {
       "date": date,
       "mar_status": mar_status,
       "occupation": occupation,
-      "balance": balance
+      "balance": balance,
+      "img": img
     };
   }
 }

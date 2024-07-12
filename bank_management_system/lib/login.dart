@@ -50,84 +50,95 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Login'),
+        backgroundColor: Colors.teal,
+        title: Text('Admin Login',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 40)),
         centerTitle: true,
       ),
 
       body: Form(
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: ListView(
-            children:<Widget>[
 
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: TextFormField(
-                  controller:_id ,
-                  decoration: InputDecoration(
-                    labelText: 'Id',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+          child: Padding(
+            padding: EdgeInsets.all(15),
+            child: ListView(
+              children:<Widget>[
+                SizedBox(height: 100,),
+
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: TextFormField(
+                    controller:_id ,
+                    decoration: InputDecoration(
+                      labelText: 'Id',
+                      hintText: 'enter your id',
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+                    ),
                   ),
                 ),
-              ),
 
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: TextFormField(
-                  controller:_password ,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: TextFormField(
+                    controller:_password ,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      hintText: 'enter your password',
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+                    ),
                   ),
                 ),
-              ),
 
-              ElevatedButton(
-                child: Text('Login'),
-                onPressed: () async{
-                  Admin s= await adminlogin();
-                  if( s !=null && s.id==int.parse(_id.text ) && s.password==_password.text) {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminpage()));
-                  }else{
-                    SnackBar snk =SnackBar(content: Text('Enter correct information'));
-                    ScaffoldMessenger.of(context).showSnackBar(snk);
-                  }
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>Showall()));
-                },
-              ),
-
-
-
-              // ----------------------- Extra // login er bitor ya o condition kora --------------------
-
-              // ElevatedButton(
-              //   child: Text('Login'),
-              //   onPressed: () async{
-              //     Admin s= await adminlogin();
-              //     if( s !=null && s.id==int.parse(_id.text ) && s.password==_password.text) {
-              //       if(s.round=='57'){
-              //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Showall()));
-              //       }else if(s.round=='58'){
-              //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
-              //       }else if(s.round=='59'){
-              //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Searchid()));
-              //       }
-              //
-              //     }else{
-              //       SnackBar snk =SnackBar(content: Text('enter correct information'));
-              //       ScaffoldMessenger.of(context).showSnackBar(snk);
-              //     }
-              //     // Navigator.push(context, MaterialPageRoute(builder: (context)=>Showall()));
-              //   },
-              // ),
+                ElevatedButton(
+                  child: Text('Login',
+                    style: TextStyle(fontSize: 25,color: Colors.white),
+                  ),
+                  onPressed: () async{
+                    Admin s= await adminlogin();
+                    if( s !=null && s.id==int.parse(_id.text ) && s.password==_password.text) {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Adminpage()));
+                    }else{
+                      SnackBar snk =SnackBar(content: Text('Enter correct information'));
+                      ScaffoldMessenger.of(context).showSnackBar(snk);
+                    }
+                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>Showall()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue
+                  ),
+                ),
 
 
 
+                // ----------------------- Extra // login er bitor ya o condition kora --------------------
 
-            ],
+                // ElevatedButton(
+                //   child: Text('Login'),
+                //   onPressed: () async{
+                //     Admin s= await adminlogin();
+                //     if( s !=null && s.id==int.parse(_id.text ) && s.password==_password.text) {
+                //       if(s.round=='57'){
+                //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Showall()));
+                //       }else if(s.round=='58'){
+                //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
+                //       }else if(s.round=='59'){
+                //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Searchid()));
+                //       }
+                //
+                //     }else{
+                //       SnackBar snk =SnackBar(content: Text('enter correct information'));
+                //       ScaffoldMessenger.of(context).showSnackBar(snk);
+                //     }
+                //     // Navigator.push(context, MaterialPageRoute(builder: (context)=>Showall()));
+                //   },
+                // ),
+
+
+
+
+              ],
+            ),
           ),
         ),
-      ),
+
     );
   }
 }
