@@ -1,0 +1,129 @@
+
+------------------------------------------------------------------ Form -------------------------------------------------------------------------
+class _MyHomePageState extends State<MyHomePage> {
+
+  int _counter = 0;
+
+  TextEditingController t1 = TextEditingController();
+  TextEditingController t2 = TextEditingController();
+  TextEditingController t3 = TextEditingController();
+
+  return Scaffold(
+
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,          
+      ),
+
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(15),
+            child: TextField(
+              controller: t1,
+              decoration: InputDecoration(
+                labelText: 'num1',
+                hintText: 'enter number',
+                icon: Icon(Icons.ac_unit),
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(15),
+            child: TextField(
+              controller: t2,
+
+              // obscureText: true, //----- for password ( value hide rakha )
+
+              decoration: InputDecoration(
+                labelText: 'num2',
+                hintText: 'enter number',
+                icon: Icon(Icons.ac_unit),
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(15),
+            child: TextField(
+              controller: t3,
+              decoration: InputDecoration(
+                labelText: 'Show Addition',
+                hintText: 'Show',
+                icon: Icon(Icons.ac_unit),
+               border:OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      double x = double.parse(t1.text);
+                      double y = double.parse(t2.text);
+                      double sum = x + y;
+
+                      SnackBar s = SnackBar(content: Text(sum.toString()));
+                      ScaffoldMessenger.of(context).showSnackBar(s);
+                      t3.text = sum.toString();
+                    },
+                    child: Text("Add")),
+              ),
+
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      double x = double.parse(t1.text);
+                      double y = double.parse(t2.text);
+                      double sub = x - y;
+
+                      SnackBar s = SnackBar(content: Text(sub.toString()));
+                      ScaffoldMessenger.of(context).showSnackBar(s);
+                      t3.text = sub.toString();
+                    },
+                    child: Text("Sub")),
+              ),
+
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      double x = double.parse(t1.text);
+                      double y = double.parse(t2.text);
+                      double multi = x * y;
+
+                      SnackBar s = SnackBar(content: Text(multi.toString()));
+                      ScaffoldMessenger.of(context).showSnackBar(s);
+                      t3.text = multi.toString();
+                    },
+                    child: Text("Multi")),
+              ),
+
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      double x = double.parse(t1.text);
+                      double y = double.parse(t2.text);
+                      double div = x / y;
+
+                      SnackBar s = SnackBar(content: Text(div.toString()));
+                      ScaffoldMessenger.of(context).showSnackBar(s);
+                      t3.text = div.toString();
+                    },
+                    child: Text("Div")),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );

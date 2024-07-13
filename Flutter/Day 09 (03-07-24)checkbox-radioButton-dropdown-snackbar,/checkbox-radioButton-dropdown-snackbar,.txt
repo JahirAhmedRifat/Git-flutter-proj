@@ -1,0 +1,207 @@
+----------------------------------- Checkbox, RadioButton, Dropdown, Snackbar ------------------------------------------------------
+
+------------------------------------------- alada kora just code golo ( sob body er bitor nichi)---------------------------------------------------
+
+ // ------------------- checkbox --------------------------------------
+          Row(
+            children: [
+              Checkbox(
+                value: p,   //class ya variable ache
+
+                onChanged: (bool? value) {
+                  setState(() {
+                    p = value;
+                    SnackBar s = SnackBar(content: Text(p.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(s);
+                  });
+                },
+              ),
+              Text('Java'),
+            ],
+          ),
+
+          // ------------------------------ Radio button -------------------------
+
+          Row(
+            children: [
+              Radio<String>(
+                value: 'female',
+                groupValue: g,
+                onChanged: (String? value) {
+                  setState(() {
+                    g = value;
+                    SnackBar s = SnackBar(content: Text(g.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(s);
+                  });
+                },
+              ),
+              Text('Female'),
+            ],
+          ),
+
+          Row(
+            children: [
+              Radio<String>(
+                value: 'male',
+                groupValue: g,
+                onChanged: (String? value) {
+                  setState(() {
+                    g = value;
+                    SnackBar s = SnackBar(content: Text(g.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(s);
+                  });
+                },
+              ),
+              Text('Male'),
+            ],
+          ),
+
+          // --------------------------- Dropdown ------------------------------
+
+          Row(
+            children: [
+              DropdownButton(
+                  value: dd,
+                  items:<DropdownMenuItem<String>>[
+                    DropdownMenuItem<String>(
+                      child: Text('Web'),
+                      value: "web",
+                    ),
+
+                    DropdownMenuItem<String>(
+                      child: Text('Image'),
+                      value: "image",
+                    ),
+
+                    DropdownMenuItem<String>(
+                      child: Text('News'),
+                      value: "news",
+                    ),
+
+                    DropdownMenuItem<String>(
+                      child: Text('Shopping'),
+                      value: "shopping",
+                    ),
+
+                  ],
+                  onChanged: (String? value){
+                   setState(() {
+                     dd=value;
+                     SnackBar s = SnackBar(content: Text(dd.toString()));
+                     ScaffoldMessenger.of(context).showSnackBar(s);
+                   });
+                  }
+              ),
+            ],
+          ),
+
+-----------------------------------Example:  Project ta (3rd Class)-------------------------------
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  String? g = "";     //radio button
+  String? dd="web";   //dropdown
+  bool? p = true;    //for checkbox
+
+  return Scaffold(
+
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[       
+          // ------------------- checkbox --------------------------------------
+          Row(
+            children: [
+              Checkbox(
+                value: p,
+                onChanged: (bool? value) {
+                  setState(() {
+                    p = value;
+                    SnackBar s = SnackBar(content: Text(p.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(s);
+                  });
+                },
+              ),
+              Text('Java'),
+            ],
+          ),
+
+          // ------------------------------ Radio button -------------------------
+          Row(
+            children: [
+              Radio<String>(
+                value: 'female',
+                groupValue: g,
+                onChanged: (String? value) {
+                  setState(() {
+                    g = value;
+                    SnackBar s = SnackBar(content: Text(g.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(s);
+                  });
+                },
+              ),
+              Text('Female'),
+            ],
+          ),
+
+          Row(
+            children: [
+              Radio<String>(
+                value: 'male',
+                groupValue: g,
+                onChanged: (String? value) {
+                  setState(() {
+                    g = value;
+                    SnackBar s = SnackBar(content: Text(g.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(s);
+                  });
+                },
+              ),
+              Text('Male'),
+            ],
+          ),
+
+          // --------------------------- Dropdown ------------------------------
+          Row(
+            children: [
+              DropdownButton(
+                  value: dd,
+
+                  items:<DropdownMenuItem<String>>[
+                    DropdownMenuItem<String>(
+                      child: Text('Web'),
+                      value: "web",
+                    ),
+
+                    DropdownMenuItem<String>(
+                      child: Text('Image'),
+                      value: "image",
+                    ),
+
+                    DropdownMenuItem<String>(
+                      child: Text('News'),
+                      value: "news",
+                    ),
+
+                    DropdownMenuItem<String>(
+                      child: Text('Shopping'),
+                      value: "shopping",
+                    ),
+
+                  ],
+
+                  onChanged: (String? value){
+                   setState(() {
+                     dd=value;
+                     SnackBar s = SnackBar(content: Text(dd.toString()));
+                     ScaffoldMessenger.of(context).showSnackBar(s);
+                   });
+                  }
+              ),
+            ],
+          ),
+	---------------------------------------------
+
+
+        ],
+      ),
+    );

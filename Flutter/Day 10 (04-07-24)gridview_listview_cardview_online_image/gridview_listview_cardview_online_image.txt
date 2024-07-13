@@ -1,0 +1,452 @@
+			=============>>>>> gridview, listview, cardview,online image add <<<<<<<<<<====================
+
+------------------------------------ main.dart// Grid view part -------------------------------------------------------
+import 'package:flutter/material.dart';
+import 'package:projectnavigator/email.dart';
+import 'package:projectnavigator/nextpage.dart';
+import 'package:projectnavigator/phone.dart';
+import 'package:projectnavigator/settings.dart';
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // ---------------------- navigation drawer -----------------
+
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text('Md. Jahir Uddin'),
+              accountEmail: Text('jahir@gmail.com'),
+              currentAccountPicture: CircleAvatar(
+                child: ClipOval(
+                  child: Image.asset('images/jpg_44-2.jpg'),
+                ),
+              ),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('images/jpg_44-2.jpg'),
+                      fit: BoxFit.cover)),
+            ),
+
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Next Page'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Nextpage()));
+              },
+            ),
+
+            ListTile(
+              leading: Icon(Icons.call),
+              title: Text('Phone'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Phone()));
+              },
+            ),
+
+            ListTile(
+              leading: Icon(Icons.email),
+              title: Text('Email'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Email()));
+              },
+            ),
+
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
+              },
+            ),
+
+          ],
+        ),
+      ),
+
+      // ---------------------- app bar-----------------
+
+      appBar: AppBar(
+        // titleSpacing: 100,
+        centerTitle: true,
+        title: Text('Welcome to Home Page'),
+        backgroundColor: Colors.indigoAccent,
+      ),
+
+      // ---------------------- body -----------------
+
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+
+        children: [
+          Text('This is a Home Pasge'),
+
+          // ----------------------- grid view ------------------------------------
+
+          Expanded(
+              child: GridView.count(
+                crossAxisCount: 3,
+                padding: EdgeInsets.all(20),
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                primary: true,
+                children:<Widget> [
+                  
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    child: SizedBox.fromSize(
+                      size: Size(80,80),
+                      child: ClipOval(
+                        child: Material(
+                          color: Colors.orange,
+                          child: InkWell(
+                            splashColor: Colors.green,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget>[
+                                Icon(Icons.email,size: 50,),
+                                Text('Contact',style: TextStyle(fontSize: 20),),
+                              ],
+                            ),
+                            onTap: (){
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => Nextpage()));
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    child: SizedBox.fromSize(
+                      size: Size(80,80),
+                      child: ClipOval(
+                        child: Material(
+                          color: Colors.orange,
+                          child: InkWell(
+                            splashColor: Colors.green,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget>[
+                                Icon(Icons.person,size: 30,),
+                                Text('People',style: TextStyle(fontSize: 15),),
+                              ],
+                            ),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Phone()));
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    child: SizedBox.fromSize(
+                      size: Size(80,80),
+                      child: ClipOval(
+                        child: Material(
+                          color: Colors.orange,
+                          child: InkWell(
+                            splashColor: Colors.green,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget>[
+                                Icon(Icons.search,size: 50,),
+                                Text('Search',style: TextStyle(fontSize: 15),),
+                              ],
+                            ),
+                            onTap: (){
+
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    child: SizedBox.fromSize(
+                      size: Size(80,80),
+                      child: ClipOval(
+                        child: Material(
+                          color: Colors.blue,
+                          child: InkWell(
+                            splashColor: Colors.green,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget>[
+                                Icon(Icons.settings,size: 50,),
+                                Text('Settings',style: TextStyle(fontSize: 15),),
+                              ],
+                            ),
+                            onTap: (){
+
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    child: SizedBox.fromSize(
+                      size: Size(80,80),
+                      child: ClipOval(
+                        child: Material(
+                          color: Colors.orange,
+                          child: InkWell(
+                            splashColor: Colors.red,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget>[
+                                Icon(Icons.access_alarm,size: 50,),
+                                Text('Alarm',style: TextStyle(fontSize: 20),),
+                              ],
+                            ),
+                            onTap: (){
+
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    child: SizedBox.fromSize(
+                      size: Size(80,80),
+                      child: ClipOval(
+                        child: Material(
+                          color: Colors.orange,
+                          child: InkWell(
+                            splashColor: Colors.green,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget>[
+                                Icon(Icons.email,size: 50,),
+                                Text('Contact',style: TextStyle(fontSize: 20),),
+                              ],
+                            ),
+                            onTap: (){
+
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+
+              ),
+          ),
+
+        ],
+      ),
+
+      // ---------------------- floating action button -----------------
+
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.arrow_back),
+        tooltip: 'go next page',
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Nextpage()));
+        },
+      ),
+    );
+  }
+}
+
+--------------------------------------------- nextpage.dart// List View part ------------------------------------------------------
+
+import 'package:flutter/material.dart';
+import 'package:projectnavigator/main.dart';
+
+class _MynextPageState extends State<MynextPage> {
+
+
+   List<String> student=["Jahir","Karim","Rifat","Jamal","Jahir","Karim","Rifat","Jamal"];
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 100,
+        title: Text('Welcome to Next Page'),
+        backgroundColor: Colors.deepOrange,
+      ),
+
+	// ---------------------- List View -----------------
+
+      body: ListView.builder(
+        padding: EdgeInsets.all(8),
+         itemCount: student.length,
+        itemBuilder: (BuildContext context, int index){
+          return Container(
+            margin: EdgeInsets.all(5),
+            height: 50,
+            color: Colors.amber[500],
+            child: Center(
+              child: Text(student[index]),
+            ),
+          );
+        },
+      ),
+
+	// ---------------------- floating action button -----------------
+
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.arrow_back),
+        tooltip: 'go home',
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
+          // Navigator.pop(context); ( kaj kora ai ta )
+        },
+      ),
+    );
+  }
+}
+
+-------------------------------------------- Card View Part ------------------------------------------------
+		
+		------------------------------ student.dart// student type data dekhabo tai student namee dart file banalam ----------
+
+class Student{
+String? name;
+String? details;
+String? photo;
+
+Student(this.name, this.details, this.photo);
+
+}
+
+----------------------------------------------------- phone.dart // Card view show korano --------------------------------------------
+
+import 'package:flutter/material.dart';
+import 'package:projectnavigator/main.dart';
+import 'package:projectnavigator/student.dart';
+
+class _MyPhoneState extends State<MyPhone> {
+
+  List<Student> slist=[
+    Student("Jahir", "In their range of colour, seemingly", "https://e7.pngegg.com/pngimages/119/921/png-clipart-flower-dahlia-flower-flower-garden-annual-plant-thumbnail.png"),
+    Student("Rifat", "In their range of colour.", "https://e7.pngegg.com/pngimages/119/921/png-clipart-flower-dahlia-flower-flower-garden-annual-plant-thumbnail.png"),
+    Student("Kamal", "They range in size from minute blossoms to", "https://e7.pngegg.com/pngimages/119/921/png-clipart-flower-dahlia-flower-flower-garden-annual-plant-thumbnail.png"),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 100,
+        title: Text('Welcome to Card Page'),
+        backgroundColor: Colors.lightGreen,
+      ),
+
+	//------------------ List view ya card akare dekhano ------------------------------
+
+      body: ListView.builder(
+          padding: EdgeInsets.all(8),
+          itemCount:slist.length,
+        itemBuilder: (BuildContext context, int index){
+          return Center(
+            child: Card(
+              elevation: 50,
+              shadowColor: Colors.black,
+              color: Colors.amber,
+              child: SizedBox(
+                width: 300,
+                height: 500,
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    children:<Widget>[
+                      CircleAvatar(
+                        radius: 100,
+                        backgroundImage: NetworkImage(slist[index].photo.toString()),  // -- online thake image show korano(copy image address)
+
+			//  backgroundImage: NetworkImage("https://e7.pngegg.com/pngimages/119/921/png-clipart-flower-dahlia-flower-flower-garden-annual-plant-thumbnail.png"),
+
+                      ),
+                      SizedBox(height:10),
+                      Text(
+                        slist[index].name.toString(),
+                        style: TextStyle(
+                        fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                      ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        slist[index].details.toString(),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: 300,
+                        child: ElevatedButton(
+                          child: Padding(
+                            padding: EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:<Widget> [
+                                Text("back home"),
+                              ],
+
+                            ),
+                          ),
+
+                          onPressed: (){
+
+                          },
+
+                          style: ButtonStyle(
+                              backgroundColor:WidgetStateProperty.all(Colors.green),
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+	
+	// ---------------------------------- floating action button ----------------------------------------------
+
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.arrow_back),
+        tooltip: 'go home',
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
+          // Navigator.pop(context); ( kaj kora ai ta )
+        },
+      ),
+    );
+  }
+}
+
+----------------------------------------------------------------- The End -----------------------------------------------
+
+
+
+

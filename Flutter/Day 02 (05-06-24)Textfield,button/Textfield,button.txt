@@ -1,0 +1,83 @@
+----------------------------------- label, textfield,Button,id name, email,password ---------------------------------------
+
+void main() {
+
+
+  // runApp(
+  //   const Center(
+  //       child:Text("Hello jahir",textDirection:TextDirection.ltr,style:TextStyle(color:Colors.red, fontSize: 50,),)
+  //   )
+  // );
+
+
+  runApp(
+    new MaterialApp(
+      title: "This is my flutter Application",
+      home: new Scaffold(
+        appBar: AppBar(
+          title: Text(''),
+        ),
+        body: Center(
+          // child: Text('MY First Flutter'),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Id',
+                    icon: Icon(Icons.person),
+                  ),
+                ),
+                
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    icon: Icon(Icons.person),
+                  ),
+                ),
+                
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    icon: Icon(Icons.email),
+                  ),
+                ),
+                
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    icon: Icon(Icons.email),
+                  ),
+                ),
+
+                //   --------------------------- button --------------------
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(90, 20, 0, 0),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                            onPressed: () {}, child: Text("Sign in")),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                            onPressed: () {}, child: Text("Sign up")),
+                      ),
+
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+}

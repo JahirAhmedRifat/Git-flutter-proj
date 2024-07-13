@@ -1,0 +1,415 @@
+------------------------------------------- dropdown thake data insert kora // aziz vai er code------------------------------------------------
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+  int sum =0;
+
+  String? g = "";
+  String? dd = "web";
+
+  TextEditingController t1 = TextEditingController();
+  TextEditingController t2 = TextEditingController();
+  TextEditingController t3 = TextEditingController();
+
+  void _incrementCounter() {
+    setState(() {
+
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+
+      ),
+      body: Center(
+
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+
+	// ------------------- stateless bojar jonna test// extra part --------------
+              // ElevatedButton(
+              //     child: Text('submit'),
+              //     onPressed: () {
+              //       x=x+1;
+              //       setState(() {
+              //
+              //       });
+              //     }
+              // ),
+              // Text('Hello'+x.toString()),
+
+	// --------------------------------------------------------------------------
+
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: TextField(
+                controller: t1,
+                decoration: InputDecoration(
+                  labelText: "1st Number",
+                  hintText: "Input Number",
+                  icon: Icon(Icons.edit_square),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextField(
+                // obscureText: true,
+                controller: t2,
+                decoration: InputDecoration(
+                  labelText: "2nd Number",
+                  hintText: "Input Number",
+                  icon: Icon(Icons.lock),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
+              ),
+            ),
+
+
+            SizedBox(
+              height: 10,
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                int x = int.parse(t1.text);
+                int y = int.parse(t2.text);
+                if (dd== 'web') {
+                  sum = x + y;
+                }else if(dd== 'image'){
+
+                  sum = x - y;
+                }
+
+                // t3.text= t1.text+t2.text;
+                t3.text = sum.toString();
+
+                SnackBar s = SnackBar(
+                  content: Text(sum.toString()),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(s);
+                setState(() {
+
+                });
+              },
+              child: Container(
+                child: Text(
+                  'Submit',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
+                decoration: BoxDecoration(),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text("Result: "+ sum.toString()),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+
+            Row(
+              children: [
+                DropdownButton(
+                    value: dd,
+                    items: <DropdownMenuItem<String>>[
+                      DropdownMenuItem<String>(
+                        child: Text("Web"),
+                        value: "web",
+                      ),
+                      DropdownMenuItem<String>(
+                        child: Text("Image"),
+                        value: "image",
+                      ),
+                      DropdownMenuItem<String>(
+                        child: Text("News"),
+                        value: "news",
+                      ),
+                      DropdownMenuItem<String>(
+                        child: Text("Shopping"),
+                        value: "shopping",
+                      ),
+                    ],
+                    onChanged: (String? value) {
+                      setState(() {
+                        dd = value;
+                        SnackBar s = SnackBar(content: Text(dd.toString()));
+
+                        ScaffoldMessenger.of(context).showSnackBar(s);
+                      });
+                    }),
+              ],
+            ),
+
+            // ...Dropdwon End.......
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+------------------------------------------------ Search By Id ------------------------------------------------------
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:student/student.dart';
+
+
+List<Student> objectsFromJson(String str) =>
+    List<Student>.from(json.decode(str).map((x) => Student.fromJson(x)));
+String objectsToJson(List<Student> data) =>
+    json.encode(List<Student>.from(data).map((x) => x.toJson()));
+
+
+
+
+class Searchid extends StatefulWidget {
+  const Searchid({super.key});
+
+  @override
+  State<Searchid> createState() => _SearchidState();
+}
+
+
+
+class _SearchidState extends State<Searchid> {
+  TextEditingController _id = TextEditingController();
+
+  String searchid = "";
+  late List<Student> _students = [];
+
+  // Future<List<Student>> showall() async {
+  //   final response = await http.get(
+  //     Uri.parse('http://192.168.0.220:8080/students'),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     return objectsFromJson(response.body);
+  //   } else {
+  //     throw Exception("Failed");
+  //   }
+  // }
+  //
+  // void show()async{
+  //   _students = await showall();
+  // }
+
+  Future<List<Student>> showbyid(String id) async {
+    var response;
+
+    if(id.length == 0 ){
+      //response = await http.get(Uri.parse('http://192.168.0.220:8080/students'),);
+      response = await http.get(
+        Uri.parse('http://192.168.0.220:8080/search/'+id),
+      );
+    }else{
+      response = await http.get(
+        Uri.parse('http://192.168.0.220:8080/search/'+id),
+      );
+    }
+
+    if (response.statusCode == 200) {
+      return objectsFromJson(response.body);
+    } else {
+      throw Exception("Failed");
+    }
+  }
+
+  void showid()async{
+    _students = await showbyid(_id.text);
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    //show();
+    super.initState();
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Search By Id"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            child: Form(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      controller: _id,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'please enter id';
+                        }
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'id',
+                          //hintText: 'Enter id',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_id.text.length == 0) {
+                            //showall();
+                          } else {
+                            searchid = _id.text;
+                          }
+                          showid();
+
+                          setState(() {});
+                        },
+                        child: Text("Search"),
+                        style: ButtonStyle(
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              side: BorderSide(color: Colors.red),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          SizedBox(
+            height: 200,
+            child: FutureBuilder<List<Student>>(
+              future: showbyid(_id.text),
+              builder: (context, snapshot){
+                if(snapshot.hasData){
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index){
+                      return ListTile(
+                        leading: Text(snapshot.data![index].id.toString()),
+                        title: Text(snapshot.data![index].name.toString()),
+                      );
+
+
+                    },);
+
+                }else if(snapshot.hasError){
+                  return Text("");
+                }else{
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+-------------------------------------------------------- spring Boot // controller ----------------------------------------
+
+	@GetMapping(value="/search/{id}")
+	public List<Student> serach(@PathVariable("id") int id){
+		StudentDA d = new StudentDA();
+		stlist=d.searchstudent(id);
+		return stlist;
+	}
+
+------------------------------------------------------------ Dau ---------------------------------------------------
+
+	public List<Student> searchstudent(int id) {
+		List<Student> stlist = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/stdb", "root", "nclc123456");
+			pstmt = con.prepareStatement("select * from student where id=" + id);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				stlist.add(new Student(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4)));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return stlist;
+	}
+
+
+

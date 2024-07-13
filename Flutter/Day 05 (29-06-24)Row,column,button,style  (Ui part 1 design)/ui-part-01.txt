@@ -1,0 +1,58 @@
+------------------------------------------ column, container, elevatedButton -----------------------------------------------------   
+
+body: Column(
+        children: [
+
+         SizedBox(
+           child:  Image.asset('images/cust.png',fit: BoxFit.fill,),
+           width: 400,
+           height: 450,
+
+
+         ),
+
+         //  Container(
+         //    child:  Image.asset('images/cust.png',fit: BoxFit.fill,),
+         //    width: 400,
+         //    height: 450,
+         //    decoration: BoxDecoration(
+         //      borderRadius: BorderRadius.only(bottomRight: Radius.circular(70)),
+         //
+         //
+         //    ),
+         //
+         //
+         //  ),
+
+         Container(
+           child:  Text("Learing is Everything",style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,),),
+           padding: EdgeInsets.fromLTRB(0,10,0,10),
+           
+
+         ),
+
+          Container(
+            // child:  Text("Learing with pleasure with Dear",style: TextStyle(fontSize:15, color: Color(0xffffff00)),),
+            child:  Text("Learing with pleasure with Dear",style: TextStyle(fontSize:15, color: Colors.grey),),
+            padding: EdgeInsets.fromLTRB(0,10,0,10),
+
+          ),
+
+          Text("Programmer, whereever you are"),
+
+          SizedBox(
+            height: 30,
+          ),
+
+        ElevatedButton(
+        onPressed:(){},
+        child:SizedBox(child: Text('Submit',textAlign: TextAlign.center, style: TextStyle(color: Color(0xffffffff)),),
+        width: 150,
+
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.green,
+        ),
+        ),
+    ],
+      )

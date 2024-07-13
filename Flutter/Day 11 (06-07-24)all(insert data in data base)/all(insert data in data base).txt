@@ -1,0 +1,426 @@
+		===================>>>>>>> flutter data insert by spring boot in data base <<<<<<<<<<===========================
+
+--------------------------------------- student table create (id,name,email,round)---------------------------
+	
+				int id; String name, String email, String round// table name: student// database name:stdb
+
+------------------------------ Spring boot ///  application.properties ----------------------------------
+
+spring.application.name=Signuplogin
+spring.datasource.url=jdbc:mysql://localhost/stdb
+spring.datasource.username=root
+spring.datasource.password=nclc123456
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+--------------------------------------------------- Student.java ------------------------------------------
+
+package com.example.demo;
+
+public class Student {
+	int id;
+	String name;
+	String email;
+	String round;
+	
+	public Student() {
+		super();
+	}
+
+	public Student(int id, String name, String email, String round) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.round = round;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getRound() {
+		return round;
+	}
+
+	public void setRound(String round) {
+		this.round = round;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", email=" + email + ", round=" + round + ", getId()=" + getId()
+				+ ", getName()=" + getName() + ", getEmail()=" + getEmail() + ", getRound()=" + getRound()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+	
+}
+
+
+--------------------------------------------------- StudentController.java ------------------------------------------
+
+package com.example.demo;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import org.springframework.web.bind.annotation.RestController;
+@CrossOrigin(origins = "*")
+@RestController
+public class StudentController {
+	@PostMapping(value="/signin")
+	public Student signinStudent(@RequestBody Student s) {
+		StudentDA d = new StudentDA();
+		Student st=d.studentSigninById(s.id);
+		return st;
+	}
+
+	@PostMapping(value="/insert")
+	public Student insertStudent(@RequestBody Student s) {
+		StudentDA d = new StudentDA();
+		Student st=d.insert(s);
+		return st;
+	}
+}
+
+--------------------------------------------------- StudentDA.java ------------------------------------------
+
+package com.example.demo;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class StudentDA {
+
+	PreparedStatement pstmt;
+	Connection con;
+
+	//------------------------- insert -----------------------------
+
+	public Student insert(Student p) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/stdb", "root", "nclc123456");
+			pstmt = con.prepareStatement("insert into student values(?,?,?,?)");
+			pstmt.setInt(1, p.id);
+			pstmt.setString(2, p.name);
+			pstmt.setString(3, p.email);
+			pstmt.setString(4, p.round);
+			int n = pstmt.executeUpdate();
+
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+
+
+
+	public Student studentSigninById(int id) {
+		Student s = new Student();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/stdb", "root", "nclc123456");
+			pstmt = con.prepareStatement("select * from student where id=" + id);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				s = new Student(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+			}
+			
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
+}
+
+------------------------------------ Flutter // pubspec.yaml ya dependences ta import korbo (http: ^1.2.1) -------------------------------
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  http:  ^1.2.1
+
+------------------------------------------------ lib // main.dart --------------------------------------------------------------
+
+import 'package:flutter/material.dart';
+import 'package:student/signup.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+
+        title: Text(widget.title),
+      ),
+      body: Center(
+
+        child: Column(
+
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
+        },
+        tooltip: 'Sign in',
+        child: const Text("Sign Up"),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+
+------------------------------------------------------------ lib // signup.dart ------------------------------------------------
+
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:student/main.dart';
+
+List<Student> objectsFromJson(String str)=>List<Student>.from(json.decode(str).map((x)=> Student.fromJson(x)));
+String objectsToJson(List<Student> data)=>json.encode(List<Student>.from(data).map((x)=>x.toJson()));
+
+class Student{
+
+  int? id;
+  String? name;
+  String? email;
+  String? round;
+
+  Student({required this.id, required this.name, required this.email, required this.round});
+  factory Student.fromJson(Map<String,dynamic> json) => Student(id:json['id'], name: json['name'], email: json['email'], round: json['round']);
+  Map<String,dynamic> toJson(){
+    
+    return{
+    "id":id,
+    "name":name,
+    "email":email,
+    "round":round
+  };
+    
+  }
+
+}
+
+class Signup extends StatefulWidget {
+  const Signup({super.key});
+
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+
+  TextEditingController _id=TextEditingController();
+  TextEditingController _name=TextEditingController();
+  TextEditingController _email=TextEditingController();
+  TextEditingController _round=TextEditingController();
+
+  Future<Student> signupStudent() async{
+    Student s=Student(id: int.parse(_id.text), name: _name.text, email: _email.text, round: _round.text);
+    final response=await http.post(
+      Uri.parse('http://192.168.0.220:8080/insert'),
+      body:jsonEncode(s.toJson()),
+      headers: {"content-type":"application/json"}
+    );
+
+    if(response.statusCode==200){
+      return Student.fromJson(jsonDecode(response.body));
+    }else{
+      throw Exception("Error");
+    }
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
+      
+      body: Form(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: ListView(
+            children:<Widget>[
+
+              Padding(
+                  padding: EdgeInsets.all(5),
+                child: TextFormField(
+                  controller:_id ,
+                  decoration: InputDecoration(
+                    labelText: 'Id',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: TextFormField(
+                  controller:_name ,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: TextFormField(
+                  controller:_email ,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: TextFormField(
+                  controller:_round ,
+                  decoration: InputDecoration(
+                    labelText: 'Round',
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+                  ),
+                ),
+              ),
+
+              ElevatedButton(
+                  child: Text('Sign Up'),
+                onPressed: () async{
+                Student st= await signupStudent();
+
+                    if(st!=null){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
+                    }else if(_id.text.length==0){
+                      SnackBar snk =SnackBar(content: Text('enter correct info'));
+                          ScaffoldMessenger.of(context).showSnackBar(snk);
+                    }
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

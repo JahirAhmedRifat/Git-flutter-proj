@@ -1,0 +1,48 @@
+body:Column(
+
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Text("Hello"),
+
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("World"),
+
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("AB"),
+              Text("CD"),
+
+            ],
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Image.asset('images/a1.jpg',width: 150, height: 150,),
+              Image.asset('images/a2.jpg',width: 150, height: 150,),
+            ],
+          ),
+          Row(
+            children: [
+              ElevatedButton(
+                  onPressed:(){},
+                  child:Text('Submit'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                ),
+
+              ),
+            ],
+          ),
+
+        ],
+      )
