@@ -1,4 +1,5 @@
 import 'package:bank_management_system/model_class/createaccount.dart';
+import 'package:bank_management_system/model_class/ipaddress.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -8,6 +9,7 @@ List<Createaccount> objectsFromJson(String str) =>
 String objectsToJson(List<Createaccount> data) =>
     json.encode(List<Createaccount>.from(data).map((x) => x.toJson()));
 
+// ------------ only ai page Run korano --------------
 main(){
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -15,6 +17,7 @@ main(){
   ),
   );
 }
+
 
 class Checkbalance extends StatefulWidget {
   const Checkbalance({super.key});
@@ -24,6 +27,9 @@ class Checkbalance extends StatefulWidget {
 }
 
 class _CheckbalanceState extends State<Checkbalance> {
+
+  Ipaddress _ipaddress=Ipaddress();
+
   TextEditingController _id=TextEditingController();
   TextEditingController _password=TextEditingController();
 
@@ -31,7 +37,7 @@ class _CheckbalanceState extends State<Checkbalance> {
 
 
   Future<List<Createaccount>> showbyid(String id,String password) async {
-    final response = await http.get(Uri.parse('http://192.168.0.104:8080/getAndCheck/'+id+'/'+password));
+    final response = await http.get(Uri.parse(_ipaddress.add+'/getAndCheck/'+id+'/'+password));
 
     if (response.statusCode == 200) {
       return objectsFromJson(response.body);
@@ -96,6 +102,7 @@ class _CheckbalanceState extends State<Checkbalance> {
                 Padding(
                   padding: EdgeInsets.all(5),
                   child: TextFormField(
+                    obscureText: true,
                     controller:_password ,
                     decoration: InputDecoration(
                       labelText: 'Password',

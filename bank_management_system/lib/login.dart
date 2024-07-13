@@ -1,5 +1,6 @@
 import 'package:bank_management_system/adminpage.dart';
 import 'package:bank_management_system/model_class/admin.dart';
+import 'package:bank_management_system/model_class/ipaddress.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -27,13 +28,16 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  Ipaddress _ipaddress=Ipaddress();
+
   TextEditingController _id=TextEditingController();
   TextEditingController _password=TextEditingController();
 
   Future<Admin> adminlogin() async{
     Admin s=Admin(id: int.parse(_id.text), password: _password.text, name:"", gender:"", email: "", phone: "", address: "");
     final response=await http.post(
-        Uri.parse('http://192.168.0.104:8080/loginadmin'),
+        Uri.parse(_ipaddress.add+'/loginadmin'),
         body:jsonEncode(s.toJson()),
         headers: {"content-type":"application/json"}
     );
@@ -79,6 +83,7 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.all(5),
                   child: TextFormField(
                     controller:_password ,
+                    obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       hintText: 'enter your password',

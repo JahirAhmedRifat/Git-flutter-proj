@@ -1,6 +1,9 @@
 import 'package:bank_management_system/adminpage.dart';
 import 'package:bank_management_system/customerinfo.dart';
+import 'package:bank_management_system/deposit.dart';
+import 'package:bank_management_system/loanstatement.dart';
 import 'package:bank_management_system/main.dart';
+import 'package:bank_management_system/payinstallment.dart';
 import 'package:bank_management_system/showallcustomeraccount.dart';
 import 'package:bank_management_system/showapplyforaccount.dart';
 import 'package:bank_management_system/showloantransaction.dart';
@@ -45,7 +48,7 @@ class Admindrawer extends StatelessWidget {
             leading: Icon(Icons.home,color: Colors.red),
             title: Text(
               'Home',
-              style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 20),
+              style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),
             ),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
@@ -54,9 +57,7 @@ class Admindrawer extends StatelessWidget {
 
           ListTile(
             leading: Icon(Icons.view_agenda),
-            title: Text('Show apply for account',
-                style: TextStyle(fontSize: 18)
-            ),
+            title: Text('Show apply for account'),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Showapplyforaccount()));
             },
@@ -64,7 +65,7 @@ class Admindrawer extends StatelessWidget {
 
           ListTile(
             leading: Icon(Icons.view_agenda),
-            title: Text('View customer accounts', style: TextStyle(fontSize: 18)),
+            title: Text('View customer accounts'),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Showallcustomeraccount()));
             },
@@ -75,6 +76,30 @@ class Admindrawer extends StatelessWidget {
             title: Text('Customer Details'),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>Customerinfo()));
+            },
+          ),
+
+          ListTile(
+            leading: Icon(Icons.account_balance),
+            title: Text('Deposit Balance'),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Deposit()));
+            },
+          ),
+
+          ListTile(
+            leading: Icon(Icons.payments_outlined),
+            title: Text('Pay installment'),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Payinstallment()));
+            },
+          ),
+
+          ListTile(
+            leading: Icon(Icons.local_atm),
+            title: Text('Loan Statement'),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Loanstatement()));
             },
           ),
 

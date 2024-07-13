@@ -1,5 +1,6 @@
 import 'package:bank_management_system/admindrawer.dart';
 import 'package:bank_management_system/model_class/createaccount.dart';
+import 'package:bank_management_system/model_class/ipaddress.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -26,6 +27,8 @@ class Customerinfo extends StatefulWidget {
 
 class _CustomerinfoState extends State<Customerinfo> {
 
+  Ipaddress _ipaddress=Ipaddress();
+
   TextEditingController _id = TextEditingController();
 
   // String searchid = "";
@@ -44,7 +47,7 @@ class _CustomerinfoState extends State<Customerinfo> {
     //   );
     // }
 
-   final response = await http.get(Uri.parse('http://192.168.0.104:8080/search/'+id));
+   final response = await http.get(Uri.parse(_ipaddress.add+'/search/'+id));
 
     if (response.statusCode == 200) {
       return objectsFromJson(response.body);
@@ -85,6 +88,7 @@ class _CustomerinfoState extends State<Customerinfo> {
         backgroundColor: Colors.amber,
       ),
       body: SingleChildScrollView(
+        // -------------------------- Sir er code // easy ta Check balance.dart <<<<============
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -151,7 +155,7 @@ class _CustomerinfoState extends State<Customerinfo> {
             ),
 
             SizedBox(
-              height: 400,
+              height: 500,
               child: FutureBuilder<List<Createaccount>>(
                 future: showbyid(_id.text),
                 builder: (context, snapshot){

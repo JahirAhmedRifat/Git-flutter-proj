@@ -1,5 +1,6 @@
 import 'package:bank_management_system/admindrawer.dart';
 import 'package:bank_management_system/model_class/createaccount.dart';
+import 'package:bank_management_system/model_class/ipaddress.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -28,9 +29,11 @@ class Showallcustomeraccount extends StatefulWidget {
 class _ShowallcustomeraccountState extends State<Showallcustomeraccount> {
   // late List<Applyuseraccount> _alldata=[];
 
+  Ipaddress _ipaddress=Ipaddress();
+
   Future<List<Createaccount>> showallaccount() async {
     final response =
-    await http.get(Uri.parse('http://192.168.0.104:8080/showallCustomerData'));
+    await http.get(Uri.parse(_ipaddress.add+'/showallCustomerData'));
     if (response.statusCode == 200) {
       return objectsFromJson(response.body);
     } else {

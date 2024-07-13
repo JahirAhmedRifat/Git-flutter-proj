@@ -1,3 +1,4 @@
+import 'package:bank_management_system/model_class/ipaddress.dart';
 import 'package:bank_management_system/model_class/loantransaction.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_management_system/model_class/transaction.dart';
@@ -27,10 +28,13 @@ class Showloantransaction extends StatefulWidget {
 }
 
 class _ShowloantransactionState extends State<Showloantransaction> {
+
+  Ipaddress _ipaddress=Ipaddress();
+
   // late List<Loantransaction> _alldata=[];
   Future<List<Loantransaction>> showallloantransaction() async {
     final response =
-    await http.get(Uri.parse('http://192.168.0.104:8080/showallloantransaction'));
+    await http.get(Uri.parse(_ipaddress.add+'/showallloantransaction'));
     if (response.statusCode == 200) {
       return objectsFromJson(response.body);
     } else {

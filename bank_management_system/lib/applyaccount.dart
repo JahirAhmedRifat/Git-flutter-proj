@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bank_management_system/model_class/applyuseraccount.dart';
+import 'package:bank_management_system/model_class/ipaddress.dart';
 import 'package:bank_management_system/userpage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class Applyaccount extends StatefulWidget {
 }
 
 class _ApplyaccountState extends State<Applyaccount> {
+  Ipaddress _ipaddress=Ipaddress();
+
   TextEditingController _nid = TextEditingController();
   TextEditingController _acctype = TextEditingController();
   TextEditingController _name = TextEditingController();
@@ -45,7 +48,7 @@ class _ApplyaccountState extends State<Applyaccount> {
         occupation: _occupation.text
     );
     final response = await http.post(
-        Uri.parse('http://192.168.0.104:8080/createaccount'),
+        Uri.parse(_ipaddress.add+'/createaccount'),
         body: jsonEncode(s.toJson()),
         headers: {"content-type": "application/json"});
 

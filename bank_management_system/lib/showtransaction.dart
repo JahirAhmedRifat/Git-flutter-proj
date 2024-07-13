@@ -1,3 +1,4 @@
+import 'package:bank_management_system/model_class/ipaddress.dart';
 import 'package:bank_management_system/model_class/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_management_system/admindrawer.dart';
@@ -26,9 +27,12 @@ class Showtransaction extends StatefulWidget {
 
 class _ShowtransactionState extends State<Showtransaction> {
   // late List<Transaction> _alldata=[];
+
+  Ipaddress _ipaddress=Ipaddress();
+
   Future<List<Transaction>> showalltransaction() async {
     final response =
-    await http.get(Uri.parse('http://192.168.0.104:8080/getalltransaction'));
+    await http.get(Uri.parse(_ipaddress.add+'/getalltransaction'));
     if (response.statusCode == 200) {
       return objectsFromJson(response.body);
     } else {
